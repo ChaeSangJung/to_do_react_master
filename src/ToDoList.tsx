@@ -37,6 +37,7 @@ interface IForm {
     username: string;
     password: string;
     password1: string;
+    extraError?:string;
 }
 
 const TodoList = () => {
@@ -44,14 +45,22 @@ const TodoList = () => {
         register, 
         handleSubmit, 
         formState : {errors},
+        setError,
     } = useForm<IForm>({
         defaultValues: {
             email: "@naver.com"
         }
     });
-    const onValid = (data : {}) => {
-        console.log(data);
+    const onValid = (data : IForm) => {
+        if(data.password !== data.password1) {
+            setError(
+                "password1",
+                {message : "Password is not the same"},
+                {shouldFocus: true}
+            );
+        }
     }
+    console.log(errors);
     return (
         <>
             <div>
@@ -71,7 +80,15 @@ const TodoList = () => {
                     />
                     <span>{errors?.email?.message}</span>
                     <input 
-                        {...register("firstName", {required: "write here"})} 
+                        {...register("firstName", {
+                            required: "write here",
+                            validate: {
+                                noNico: (value) => 
+                                    value.includes("nico") ? "no nicos allowed" : true,
+                                noNick: (value) => 
+                                    value.includes("nick") ? "no nick allowed" : true,
+                            },
+                        })} 
                         placeholder="First Name" 
                     />
                     <span>{errors?.firstName?.message}</span>
@@ -102,6 +119,7 @@ const TodoList = () => {
                     />
                     <span>{errors?.password1?.message}</span>
                     <button>Add</button>
+                    <span>{errors?.extraError?.message}</span>
                 </form>
             </div>
         </>
