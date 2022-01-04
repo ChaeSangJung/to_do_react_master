@@ -3,3 +3,6 @@ export interface IToDo {
     id: number;
     category: "TO_DO" | "DOING" | "DONE";
 }
+export interface IForm {
+    toDo : string;
+}

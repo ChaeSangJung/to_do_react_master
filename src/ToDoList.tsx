@@ -1,8 +1,5 @@
 import { useForm } from "react-hook-form";
-
-interface IForm {
-    toDo : string;
-}
+import { IForm } from "./types";
 
 const TodoList = () => {
     const { register, handleSubmit, setValue } = useForm<IForm>();
