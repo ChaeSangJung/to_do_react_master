@@ -9,9 +9,16 @@ function ToDo({text, category, id}:IToDo){
         const {
             currentTarget : {dataset : {name}},
         } = event;
-        console.log(name);
+        setTodos((oldToDos)=>{
+            // target 경로 찾기
+            const targetIndex = oldToDos.findIndex(toDo => toDo.id === id);
+            const oldToDo = oldToDos[targetIndex];
+            const newToDo = {text:text, id:id, category:name};
+            console.log(oldToDo, newToDo);
+            return oldToDos;
+        });
     }
-    console.log(setTodos)
+    
     return (
         <li>
             <span>{text}{category}</span>
