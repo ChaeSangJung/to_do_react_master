@@ -13,9 +13,18 @@ function ToDo({text, category, id}:IToDo){
             // target 경로 찾기
             const targetIndex = oldToDos.findIndex(toDo => toDo.id === id);
             const oldToDo = oldToDos[targetIndex];
-            const newToDo = {text:text, id:id, category:name};
-            console.log(oldToDo, newToDo);
-            return oldToDos;
+            const newToDo = {text:text, id:id, category:name as any};
+            //  replace the to do in the index, targetIndex with newToDo
+            // const food = ["가","나", "다", "라"];
+            // const front = ["가"];
+            // const back = ["다", "라"]
+            // const finalPart = [...front, "나", ...back];
+
+            // const target = 1;
+
+            // console.log(food.slice(0,target), food.slice(target+1));
+            // console.log([...food.slice(0, target),"나",...food.slice(target+1)]);
+            return [...oldToDos.slice(0,targetIndex),newToDo,...oldToDos.slice(targetIndex+1)];
         });
     }
     
