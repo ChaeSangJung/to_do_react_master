@@ -1,7 +1,7 @@
 import React from "react";
 import { useSetRecoilState } from "recoil";
 import { toDoSate } from "../atom";
-import { IToDo } from "../types";
+import { Categories, IToDo } from "../types";
 
 function ToDo({text, category, id}:IToDo){
     const setTodos = useSetRecoilState(toDoSate);
@@ -13,7 +13,7 @@ function ToDo({text, category, id}:IToDo){
             // target 경로 찾기
             const targetIndex = oldToDos.findIndex(toDo => toDo.id === id);
             const oldToDo = oldToDos[targetIndex];
-            const newToDo = {text:text, id:id, category:name as any};
+            const newToDo = {text:text, id:id, category:name as any };
             //  replace the to do in the index, targetIndex with newToDo
             // const food = ["가","나", "다", "라"];
             // const front = ["가"];
@@ -31,14 +31,14 @@ function ToDo({text, category, id}:IToDo){
     return (
         <li>
             <span>{text}{category}</span>
-            {category !== "DOING" && (
-                <button data-name="DOING" onClick={onClick}>Doing</button>
+            {category !== Categories.DOING && (
+                <button data-name={Categories.DOING} onClick={onClick}>Doing</button>
             )}
-            {category !=="TO_DO" && (
-                <button data-name="TO_DO" onClick={onClick}>TO DO</button>
+            {category !== Categories.TO_DO && (
+                <button data-name={Categories.TO_DO} onClick={onClick}>TO DO</button>
             )}
-            {category !=="DONE" && (
-                <button data-name="DONE" onClick={onClick}>DONE</button>
+            {category !== Categories.DONE && (
+                <button data-name={Categories.DONE} onClick={onClick}>DONE</button>
             )}
             {/* <button>Doing</button>
             <button>To Do</button>

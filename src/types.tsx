@@ -6,3 +6,9 @@ export interface IToDo {
 export interface IForm {
     toDo : string;
 }
+
+export enum Categories {
+    "TO_DO" = "TO_DO",
+    "DOING" = "DOING",
+    "DONE" = "DONE"
+}

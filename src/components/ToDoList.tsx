@@ -1,6 +1,7 @@
 import React from "react";
 import { useRecoilState, useRecoilValue } from "recoil";
 import { categoryState, toDoSate, toDoSelector } from "../atom";
+import { Categories } from "../types";
 import CreateToDo from "./CreateToDo";
 import ToDo from "./ToDo";
 
@@ -8,10 +9,10 @@ const TodoList = () => {
     const toDos = useRecoilValue(toDoSate);
     const toSoSelect = useRecoilValue(toDoSelector);
     // 현재의 값과, 값을 수정하는 함수를 가져오는 훅
-    const [category, setCategory] = useRecoilState<string>(categoryState);
+    const [category, setCategory] = useRecoilState(categoryState);
     const onInput = (event:React.FormEvent<HTMLSelectElement>) => {
         const {  currentTarget: {value} } = event;
-        setCategory(value);
+        setCategory(value as any);
     }
 
     return (
@@ -19,9 +20,9 @@ const TodoList = () => {
             <div>
                 <h1>All</h1>
                 <select value={category} onInput={onInput}>
-                    <option value="TO_DO">To Do</option>
-                    <option value="DOING">Doing</option>
-                    <option value="DONE">Done</option>
+                    <option value={Categories.TO_DO}>To Do</option>
+                    <option value={Categories.DOING}>Doing</option>
+                    <option value={Categories.DONE}>Done</option>
                 </select>
                 <CreateToDo />
                 <ul>
