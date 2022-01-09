@@ -1,6 +1,6 @@
 import { atom, selector } from "recoil";
-import ToDo from "./components/ToDo";
 import { IToDo } from "./types";
+
 
 
 export const toDoSate = atom<IToDo[]>({
@@ -23,14 +23,22 @@ export const toDoSate = atom<IToDo[]>({
 //     }
 // });
 
+export const categoryState = atom({
+    key: "category",
+    default: "TO_DO",
+});
+
 export const toDoSelector = selector({
     key: "toDoSelector",
     get: ({get}) => {
         const toDos = get(toDoSate);
-        return [
-            toDos.filter((toDo) => toDo.category === "TO_DO"),
-            toDos.filter((toDo) => toDo.category === "DOING"),
-            toDos.filter((toDo) => toDo.category === "DONE"),
-        ]
+        const category = get(categoryState);
+        return toDos.filter((toDo) => toDo.category === category);
+        // console.log(category)
+        // return [
+        //     toDos.filter((toDo) => toDo.category === "TO_DO"),
+        //     toDos.filter((toDo) => toDo.category === "DOING"),
+        //     toDos.filter((toDo) => toDo.category === "DONE"),
+        // ]
     }
 });
