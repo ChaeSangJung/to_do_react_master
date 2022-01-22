@@ -1,5 +1,8 @@
+import React from "react";
+import { useRecoilValue, useSetRecoilState } from "recoil";
 import { createGlobalStyle } from "styled-components";
-import TodoList from "./components/ToDoList";
+import { isDarkAtom } from "./atom";
+import TodoList from "./ToDoList";
 
 const GlobalStyle = createGlobalStyle`
   @import url('https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@300;400&display=swap');
@@ -67,10 +70,19 @@ const GlobalStyle = createGlobalStyle`
 `
 
 const App = () => {
+  const isDark = useRecoilValue(isDarkAtom);
+  const setDarkAtom = useSetRecoilState(isDarkAtom);
+
+  const toggleDarkAtom = (event:React.MouseEvent<HTMLButtonElement>) => {
+    setDarkAtom((prev) => !prev);
+  }
+
   return (
     <>
+      <h1>{isDark ? "Dark" : "light"}</h1>
+      <button onClick={toggleDarkAtom}>toggle {isDark ? "Dark" : "light"}</button>
       <GlobalStyle />
-      <TodoList />
+      <TodoList/>
     </>
   );
 }

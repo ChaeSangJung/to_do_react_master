@@ -13,7 +13,7 @@ Learn and dominate the React ecosystem once and for all.
 - Typescript
 - Firebase
 
-
+- setState와 비슷한 useSetRecoilState
 - React Hook Form
 - Selectors
     - derived state를 나타냅니다.
