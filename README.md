@@ -15,6 +15,12 @@ Learn and dominate the React ecosystem once and for all.
 
 - setState와 비슷한 useSetRecoilState
 - React Hook Form
+    - const { register, handleSubmit, watch, formState: { errors },setError } = useForm();
+    - const onSubmit = data => console.log(data);
+    - handleSubmit:validation 후 호출
+    - formstate : 
+    - = useForm<IForm>();
+    -  const handleValid = (data: IForm) => {}
 - Selectors
     - derived state를 나타냅니다.
     - derived state
@@ -30,5 +36,7 @@ Learn and dominate the React ecosystem once and for all.
 
     - useState﹤{loading: boolean}＞({loading:true})
 
-enum : enumerable
+- enum : enumerable
     - 원하는 string들로 enumerable을 만들고
+
+- 5.11~

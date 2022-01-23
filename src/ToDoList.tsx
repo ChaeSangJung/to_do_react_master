@@ -29,14 +29,20 @@ import { useForm } from "react-hook-form";
 //     )
 // }
 const TodoList = () => {
-    const {register:formResister, watch} = useForm();
+    const {register:formResister, handleSubmit, formState} = useForm();
+    // handleSubmit validation 담당
     // console.log(formResister("xxx"))
-    console.log(watch());
+    
+    const onValid = (data:any) => {
+        console.log(data)
+    }
+
+    console.log(formState)
 
     return (
         <div>
-            <form>
-                <input {...formResister("email")} placeholder="Email" />
+            <form onSubmit={handleSubmit(onValid)}>
+                <input {...formResister("email",{required: true})} placeholder="Email" />
                 <input {...formResister("firstName")} placeholder="First Name" />
                 <input {...formResister("lastName")} placeholder="Last Name" />
                 <input {...formResister("userName")} placeholder="User name" />
